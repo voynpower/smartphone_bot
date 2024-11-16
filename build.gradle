@@ -32,8 +32,11 @@ dependencies {
 	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
-tasks.named('test') {
+tasks.withType(Test) {
 	useJUnitPlatform()
 }
+

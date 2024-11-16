@@ -14,7 +14,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     // Adminlar sonini saqlash
-    @Getter
     private long adminCount;
 
     @Autowired
