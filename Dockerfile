@@ -1,17 +1,17 @@
-# 1. Rasm (image) sifatida openjdk:17 foydalanamiz
-FROM openjdk:17-jdk-slim
+# 1. Java 17 obrazini tanlaymiz
+FROM openjdk:17-jdk-alpine AS builder
 
-# 1. Rasm (image) sifatida openjdk:17 foydalanamiz
-FROM openjdk:17-jdk-slim
+# 2. Ilova fayllarini konteynerga ko'chiramiz
+COPY . /app
 
-# 2. Loyiha uchun ishchi katalog yaratamiz
+# 3. Ilovani quramiz (testlarni o'tkazmay)
 WORKDIR /app
+RUN ./gradlew build -x test
 
-# 3. build/libs/ dan JAR faylni loyihaga ko'chiramiz
-COPY build/libs/*.jar app.jar
+# 4. Yaratilgan JAR faylini konteynerga ko'chiramiz
+FROM openjdk:17-jdk-alpine
 
-# 4. Spring Boot ilovasini portini o'rnatamiz (Docker konteyner ichidagi port)
-EXPOSE 8080
+COPY --from=builder /app/build/libs/*.jar app.jar
 
-# 5. JAR faylni ishga tushiramiz
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# 5. Spring Boot ilovasini ishga tushiramiz
+ENTRYPOINT ["java", "-jar", "/app.jar"]
