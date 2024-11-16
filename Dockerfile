@@ -11,7 +11,7 @@ WORKDIR /app
 COPY build/libs/*.jar app.jar
 
 # 4. Spring Boot ilovasini portini o'rnatamiz (Docker konteyner ichidagi port)
-EXPOSE 8082
+EXPOSE 8080
 
 # 5. JAR faylni ishga tushiramiz
 ENTRYPOINT ["java", "-jar", "app.jar"]
