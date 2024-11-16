@@ -22,5 +22,5 @@ spring:
       mode: always
 
 server:
-  port: 8083  # Yangi port raqamini kiritamiz
+  port: 8080  # Yangi port raqamini kiritamiz
 
